@@ -1,4 +1,11 @@
+// Components
+import TextTitle from "@/Components/atoms/TextTitle";
+
 const App = () => {
-  return <div>Home</div>;
+    return (
+        <>
+            <TextTitle>Home</TextTitle>
+        </>
+    );
 };
 export default App;
