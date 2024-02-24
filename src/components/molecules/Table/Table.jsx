@@ -1,28 +1,33 @@
+'use client'
+
+// Hooks
 import React from "react";
+
+// Styles
 import classes from "./Table.module.css";
+
+// Icons
+import { IconRun } from "@/assets/icons";
+
+// Components
+import TableField from "@/components/molecules/TableField";
 
 const Table = () => {
     return (
         <div className={classes["table-container"]}>
-            <table className={classes["table"]}>
-                <thead>
-                    <tr>
-                        <th>Título 1</th>
-                        <th>Título 2</th>
-                        <th>Título 3</th>
-                        <th>Título 4</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Dato 1</td>
-                        <td>Dato 2</td>
-                        <td>Dato 3</td>
-                        <td>Dato 4</td>
-                    </tr>
-                    {/* Agrega más filas según sea necesario */}
-                </tbody>
-            </table>
+            <div className={classes["table-title"]}>
+                <ol className={classes["title"]}>
+                    <li>Procesos</li>
+                    <li>Actualizado</li>
+                    <li>Informacion </li>
+                    <li>Estado</li>
+                    <li>Acciones</li>
+                </ol>
+            </div>
+
+            <TableField name= 'update 1' />
+            <TableField name= 'update 2'/>
+            <TableField name= 'update 3' />
         </div>
     );
 };
