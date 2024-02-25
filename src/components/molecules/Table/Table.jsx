@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 // Hooks
 import React from "react";
@@ -25,9 +25,9 @@ const Table = () => {
                 </ol>
             </div>
 
-            <TableField name= 'update 1' />
-            <TableField name= 'update 2'/>
-            <TableField name= 'update 3' />
+            <TableField name="update proccess 1" />
+            <TableField name="update process 2" />
+            <TableField name="update process3" />
         </div>
     );
 };

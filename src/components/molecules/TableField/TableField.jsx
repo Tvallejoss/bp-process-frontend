@@ -1,19 +1,18 @@
-'use client'
+"use client";
 
 // Hooks
-import React from "react";
+import { useState } from "react";
 
 // Styles
 import classes from "./TableField.module.css";
 
-const TableField = ( {name}) => {
-    
-    const openPopUp = () => 
-    {
-        console.log('name', name);
-        alert('Popup open', name )
-    }
+// Components
+import Modal from "@/components/molecules/Modal";
 
+const TableField = ({ name }) => {
+    const openPopUp = () => {};
+
+    const [showFormProccessModal, setshowFormProccessModal] = useState(false);
 
     return (
         <div className={classes["table-campos"]}>
@@ -32,13 +31,21 @@ const TableField = ( {name}) => {
                         stroke="#f28e2a"
                         strokeWidth="2"
                         className="feather feather-play"
-                        onClick = {()=> openPopUp()}
+                        onClick={() => setshowFormProccessModal(true)}
                     >
                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
-
                     </svg>
                 </li>
             </ol>
+
+            {showFormProccessModal && (
+                <Modal onClose={() => setshowFormProccessModal(false)}>
+                    <h1 onCancel={() => setshowFormProccessModal(false)}>
+                        {" "}
+                        Forms: {name}
+                    </h1>
+                </Modal>
+            )}
         </div>
     );
 };
