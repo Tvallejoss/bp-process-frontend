@@ -8,6 +8,7 @@ import classes from "./TableField.module.css";
 
 // Components
 import Modal from "@/components/molecules/Modal";
+import FormsDinamic from "@/components/molecules/FormsDinamic";
 
 const TableField = ({ name }) => {
     const openPopUp = () => {};
@@ -39,11 +40,12 @@ const TableField = ({ name }) => {
             </ol>
 
             {showFormProccessModal && (
-                <Modal onClose={() => setshowFormProccessModal(false)}>
-                    <h1 onCancel={() => setshowFormProccessModal(false)}>
-                        {" "}
-                        Forms: {name}
-                    </h1>
+                <Modal>
+                    <FormsDinamic />
+
+                    {/* <p onCancel={() => setshowFormProccessModal(false)}>
+                        cerrar
+                    </p> */}
                 </Modal>
             )}
         </div>
