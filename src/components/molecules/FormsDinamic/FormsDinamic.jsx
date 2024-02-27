@@ -9,7 +9,13 @@ import Form from "@/components/molecules/Form";
 import classes from "./FormsDinamic.module.css";
 
 const FormsDinamic = () => {
-    const stepsNames = ["Formulario 1", "Formulario 2", "Formulario 3", "Formulario 4", "Formulario 5"];
+    const stepsNames = [
+        "Formulario 1",
+        "Formulario 2",
+        "Formulario 3",
+        "Formulario 4",
+        "Formulario 5",
+    ];
     const [currentStep, updateCurrentStep] = useState(1);
 
     function updateStep(step) {
@@ -17,12 +23,13 @@ const FormsDinamic = () => {
     }
     return (
         <div className={classes["steps-navigation-container"]}>
-            <ProgressBar
-                labelArray={stepsNames}
-                currentStep={currentStep}
-                updateStep={updateStep}
-            ></ProgressBar>
-
+            <div className={classes["progress-bar-container"]}>
+                <ProgressBar
+                    labelArray={stepsNames}
+                    currentStep={currentStep}
+                    updateStep={updateStep}
+                ></ProgressBar>
+            </div>
 
             <h1> Formulario a completar</h1>
             <div className={classes["form-container"]}>

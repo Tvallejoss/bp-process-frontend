@@ -26,3 +26,12 @@
     display: flex;
     justify-content: center;
 }
+
+.icon-svg svg {
+    cursor: pointer;
+}
+
+.form-modal-container {
+    width: 70dvw;
+    height: fit-content;
+}

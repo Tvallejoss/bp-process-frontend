@@ -7,6 +7,7 @@ import { useState } from "react";
 import classes from "./TableField.module.css";
 
 // Components
+import Spinner from "@/components/atoms/Spinner";
 import Modal from "@/components/molecules/Modal";
 import FormsDinamic from "@/components/molecules/FormsDinamic";
 
@@ -14,6 +15,15 @@ const TableField = ({ name }) => {
     const openPopUp = () => {};
 
     const [showFormProccessModal, setshowFormProccessModal] = useState(false);
+    const [isLoading, setLoading] = useState(false);
+
+    const runProcess = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+            setshowFormProccessModal(true);
+        }, 5000);
+    };
 
     return (
         <div className={classes["table-campos"]}>
@@ -32,20 +42,24 @@ const TableField = ({ name }) => {
                         stroke="#f28e2a"
                         strokeWidth="2"
                         className="feather feather-play"
-                        onClick={() => setshowFormProccessModal(true)}
+                        onClick={runProcess}
                     >
                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
                     </svg>
                 </li>
             </ol>
 
-            {showFormProccessModal && (
+            {!isLoading ? (
+                showFormProccessModal && (
+                    <Modal>
+                        <div className={classes["form-modal-container"]}>
+                            <FormsDinamic />
+                        </div>
+                    </Modal>
+                )
+            ) : (
                 <Modal>
-                    <FormsDinamic />
-
-                    {/* <p onCancel={() => setshowFormProccessModal(false)}>
-                        cerrar
-                    </p> */}
+                    <Spinner />
                 </Modal>
             )}
         </div>

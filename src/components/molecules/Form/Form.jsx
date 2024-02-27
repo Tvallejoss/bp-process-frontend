@@ -6,8 +6,8 @@ import classes from "./Form.module.css";
 
 const Form = () => {
     const [formData, setFormData] = useState({
-        data: "",
-        id: "",
+        idog: "",
+        isActive: "",
         type: "",
     });
 
@@ -26,78 +26,27 @@ const Form = () => {
     };
 
     return (
-        <div className={classes.formContainer}>
-            <form onSubmit={handleSubmit}>
-                <div className={classes.formGroup}>
-                    <label htmlFor="name">Nombre:</label>
+        <form onSubmit={handleSubmit} className={classes["form-container"]}>
+            <div className={classes["form-inputs-container"]}>
+                {/* <div className={classes.formGroup}>
+                    <label htmlFor="name">Idog:</label>
                     <input
                         type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
+                        id="idog"
+                        name="idog"
+                        value={formData.idog}
                         onChange={handleChange}
                         className={classes.input}
                     />
-                </div>
-                <div className={classes.formGroup}>
-                    <label htmlFor="name">Nombre:</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className={classes.input}
-                    />
-                </div>{" "}
-                <div className={classes.formGroup}>
-                    <label htmlFor="name">Nombre:</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className={classes.input}
-                    />
-                </div>{" "}
-                <div className={classes.formGroup}>
-                    <label htmlFor="name">Nombre:</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className={classes.input}
-                    />
-                </div>
-                <div className={classes.formGroup}>
-                    <label htmlFor="email">Nombre:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="text"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className={classes.input}
-                    />
-                </div>
-                <div className={classes.formGroup}>
-                    <label htmlFor="message">comentarios:</label>
-                    <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        className={classes.textarea}
-                    />
-                </div>
-                <button type="submit" className={classes.submitButton}>
-                    Enviar Informacion
-                </button>
-            </form>
-        </div>
+                </div> */}
+
+
+                
+            </div>
+            <button type="submit" className={classes.submitButton}>
+                Enviar Informacion
+            </button>
+        </form>
     );
 };
 
