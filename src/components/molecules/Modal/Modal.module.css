@@ -3,7 +3,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: fit-content;
+   width: fit-content;
+
     height: fit-content;
     padding: var(--spacing-3);
     background-color: var(--color-light);

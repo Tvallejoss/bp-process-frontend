@@ -23,7 +23,7 @@
 .selected .circle {
     color: black;
     background-color: white;
-    border-color: var(--color-buspack);
+    border-color: #d16d00;
 }
 
 .stepBlock:not(:last-child) > .circleWrapper::after {
@@ -33,7 +33,7 @@
     position: absolute;
     top: 0px;
     bottom: 0px;
-    background-color: var(--color-buspack);
+    background-color: #d16d00;
     margin: auto;
     z-index: -1;
 }

@@ -9,13 +9,7 @@ import Form from "@/components/molecules/Form";
 import classes from "./FormsDinamic.module.css";
 
 const FormsDinamic = () => {
-    const stepsNames = [
-        "Formulario 1",
-        "Formulario 2",
-        "Formulario 3",
-        "Formulario 4",
-        "Formulario 5",
-    ];
+    const stepsNames = ["", "", "", "", ""];
     const [currentStep, updateCurrentStep] = useState(1);
 
     function updateStep(step) {

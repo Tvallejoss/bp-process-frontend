@@ -7,11 +7,19 @@
 }
 
 .form-inputs-container {
-    border: 1px solid red;
     width: 100%;
-    /* height: fit-content; */
+    max-height: 40dvh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    overflow-y: scroll;
     
 }
+
+
+.first-column, .second-column, .third-column{
+    width: 30%;
+    }
 
 .formGroup {
     margin-bottom: 20px;
@@ -34,7 +42,7 @@
     background-color: #f28e2a;
     color: #fff;
     font-weight: bolder;
-    width: 40%;
+    width: 30%;
     height: 4rem;
     border: none;
     border-radius: 5px;
@@ -44,3 +52,5 @@
 .submitButton:hover {
     background-color: #d16d00;
 }
+
+
