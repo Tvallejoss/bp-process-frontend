@@ -31,7 +31,9 @@ const NewProgressBar = () => {
                         className={styles.indicator}
                         style={{
                             width: `${
-                                ((currentStep - 1) / (steps.length - 1)) * 100
+                                (Math.max(currentStep - 1, 1) /
+                                    (steps.length - 1)) *
+                                100
                             }%`,
                         }}
                     />

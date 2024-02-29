@@ -18,7 +18,7 @@ const FormsDinamic = () => {
                 <NewProgressBar />
             </div>
 
-            <h1> Formulario a completar</h1>
+            <h2> Formulario a completar</h2>
             <div className={classes["form-container"]}>
                 <Form />
             </div>
