@@ -2,6 +2,7 @@
 
 // Hooks
 import { useState } from "react";
+import axios from "axios";
 
 // Styles
 import classes from "./TableField.module.css";
@@ -16,12 +17,26 @@ const TableField = ({ name }) => {
 
     const [showFormProccessModal, setshowFormProccessModal] = useState(false);
     const [isLoading, setLoading] = useState(false);
+    const [formDataAxios, setFormDataAxios] = useState(null);
 
     const runProcess = () => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
-            setshowFormProccessModal(true);
+
+            const getFormData = async () => {
+                await axios
+                    .get("http://localhost:8000/runViewInserterP1")
+                    .then(({ data }) => {
+                        console.log("Data", data);
+                        setshowFormProccessModal(true);
+                        setFormDataAxios(data);
+                    })
+                    .catch((error) =>
+                        console.log("Error Axios al traer los Forms", error)
+                    );
+            };
+            getFormData();
         }, 5000);
     };
 
@@ -53,7 +68,10 @@ const TableField = ({ name }) => {
                 showFormProccessModal && (
                     <Modal>
                         <div className={classes["form-modal-container"]}>
-                            <FormsDinamic />
+                            <FormsDinamic
+                                formulariosPerPage={1}
+                                formularios={formDataAxios}
+                            />
                         </div>
                     </Modal>
                 )
