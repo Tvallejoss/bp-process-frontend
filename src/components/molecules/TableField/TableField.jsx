@@ -45,7 +45,7 @@ const TableField = ({ name }) => {
     return (
         <div className={classes["table-campos"]}>
             <ol>
-                <li>Update Sait info</li>
+                <li> Insertar destinos Sait</li>
                 <li>22/02/2024 6:20 AM</li>
                 <li>Info</li>
                 <li>Success</li>

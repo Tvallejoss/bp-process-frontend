@@ -54,7 +54,7 @@ const Table = () => {
 
             <div className={classes["table-campos"]}>
                 <ol>
-                    <li>Update base de datos</li>
+                    <li>Actualizar destinos</li>
                     <li>22/02/2024 6:20 AM</li>
                     <li>Info</li>
                     <li>Success</li>

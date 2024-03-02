@@ -154,16 +154,47 @@ const Paginacion = ({ currentPage, totalPages, onPageChange }) => {
     };
 
     return (
-        <div>
-            <button onClick={goToPreviousPage} disabled={!hasPreviousPage}>
+        <div className={classes['buttons-pagination-container']}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-chevron-left"
+                onClick={goToPreviousPage}
+                disabled={!hasPreviousPage}
+            >
+                <polyline
+                    points="15 18 9 12 15 6"
+                ></polyline>
                 Anterior
-            </button>
+            </svg>
             <span>
-                Página {currentPage} de {totalPages}
+                Página {currentPage}/{totalPages}
             </span>
-            <button onClick={goToNextPage} disabled={!hasNextPage}>
+
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="feather feather-chevron-right"
+                onClick={goToNextPage}
+                disabled={!hasNextPage}
+            >
+                <polyline points="9 18 15 12 9 6"></polyline>
                 Siguiente
-            </button>
+            </svg>
         </div>
     );
 };

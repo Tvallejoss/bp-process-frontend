@@ -10,6 +10,14 @@
     font-family: "Poppins";
     text-align: center;
 }
+.steps-navigation-container h1 {
+    width: 100%;
+    height: 10rem;
+    display: block;
+    border-bottom: 1px solid #ccc;
+    padding: 30px;
+    margin-bottom: 30px;
+}
 
 .progress-bar-container {
     width: 100%;
@@ -115,17 +123,18 @@
 }
 
 .submitButton {
-    width: 20%;
-    height: 4rem;
+    width: 30%;
+    height: 5rem;
     background: #f28e2a;
     border: none;
     border-radius: 8px;
     color: #fff;
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 2rem;
+    font-weight: bolder;
     cursor: pointer;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
     transition: all 200ms linear;
+    user-select: none;
 }
 
 .submitButton:active {
@@ -135,4 +144,28 @@
 .submitButton:disabled {
     background: #87a5f8;
     cursor: not-allowed;
+}
+
+
+/* pagination  */
+
+.buttons-pagination-container {
+    width: 100%;
+    border-top: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    gap: 30px;
+}
+
+.buttons-pagination-container svg {
+    width: fit-content;
+    cursor: pointer;
+}
+
+.buttons-pagination-container span {
+    width: fit-content;
+    color: #000000;
+    user-select: none;
 }
