@@ -19,6 +19,8 @@ const TableField = ({ name }) => {
     const [isLoading, setLoading] = useState(false);
     const [formDataAxios, setFormDataAxios] = useState(null);
 
+    const [totalFormularios, setTotalFormularios] = useState([]);
+
     const runProcess = () => {
         setLoading(true);
         setTimeout(() => {
@@ -28,9 +30,9 @@ const TableField = ({ name }) => {
                 await axios
                     .get("http://localhost:8000/runViewInserterP1")
                     .then(({ data }) => {
-                        console.log("Data", data);
                         setshowFormProccessModal(true);
                         setFormDataAxios(data);
+                        setTotalFormularios(data.length); // Actualiza la cantidad total de formularios
                     })
                     .catch((error) =>
                         console.log("Error Axios al traer los Forms", error)
@@ -43,7 +45,7 @@ const TableField = ({ name }) => {
     return (
         <div className={classes["table-campos"]}>
             <ol>
-                <li>Update-DB-Prod</li>
+                <li>Update Sait info</li>
                 <li>22/02/2024 6:20 AM</li>
                 <li>Info</li>
                 <li>Success</li>
@@ -71,6 +73,8 @@ const TableField = ({ name }) => {
                             <FormsDinamic
                                 formulariosPerPage={1}
                                 formularios={formDataAxios}
+                                setFormDataAxios={setFormDataAxios}
+                                handleLastFormSent={setshowFormProccessModal}
                             />
                         </div>
                     </Modal>

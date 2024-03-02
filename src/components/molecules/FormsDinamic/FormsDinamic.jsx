@@ -1,5 +1,5 @@
 // Hooks
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 // Components
 import NewProgressBar from "@/components/molecules/NewProgressBar";
@@ -7,20 +7,7 @@ import NewProgressBar from "@/components/molecules/NewProgressBar";
 // Styles
 import classes from "./FormsDinamic.module.css";
 
-const Formulario = ({ datos }) => {
-    /*
-    {
-        "idlocality": "7723", ---> No mostrar
-        "zip_code": null, ---> Codigo Postal ( Puede modificar) Viene Null 
-        "province_name": "SALTA",  ---> Provincia (se autocompleta y no puede modificarlo)
-        "locality_name": "SAN CARLOS (SAL)", ----> Nombre Localidad Buspack (se autocompleta y puede modificar)
-        "enabled_place": "SAN CARLOS (SAL)", -----> Nombre Localidad Sait (se autocompleta y no puede modificarlo)
-        "isActive": "1", ----> No mostrar
-         "zone" : "", ---> "Zona" (puede modificar) viene Null
-    }
-
-*/
-
+const Formulario = ({ datos, index, onFormSent, isSelected }) => {
     const [formData, setFormData] = useState({
         idlocality: datos["idlocality"],
         zip_code: datos["zip_code"] || "",
@@ -30,6 +17,10 @@ const Formulario = ({ datos }) => {
         isActive: datos["isActive"],
         zone: datos["zone"] || "",
     });
+
+    useEffect(() => {
+        setFormData(datos);
+    }, [datos]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -51,11 +42,13 @@ const Formulario = ({ datos }) => {
             // Manejar respuesta del backend
             if (response.status === 200) {
                 alert("Datos enviados exitosamente");
+                onFormSent(); // Llama a la función de actualización
             } else {
                 alert("Error al enviar datos al backend");
             }
         } catch (error) {
             console.error("Error:", error);
+            alert("No se pudo enviar la informacion del formulario");
         }
     };
 
@@ -69,7 +62,7 @@ const Formulario = ({ datos }) => {
                             type="text"
                             id="locality_name"
                             name="locality_name"
-                            value={datos["locality_name"]}
+                            value={formData["locality_name"]}
                             className={classes.input}
                             readOnly
                         />
@@ -81,7 +74,7 @@ const Formulario = ({ datos }) => {
                             type="text"
                             id="enabled_place"
                             name="enabled_place"
-                            value={datos["enabled_place"]}
+                            value={formData["enabled_place"]}
                             className={classes.input}
                             readOnly // Para evitar la edición del campo
                         />
@@ -92,7 +85,7 @@ const Formulario = ({ datos }) => {
                             type="text"
                             id="province_name"
                             name="province_name"
-                            value={datos["province_name"]}
+                            value={formData["province_name"]}
                             className={classes.input}
                             readOnly // Para evitar la edición del campo
                         />
@@ -106,7 +99,7 @@ const Formulario = ({ datos }) => {
                             type="text"
                             id="zip_code"
                             name="zip_code"
-                            value={datos.zip_code || ""} // Si zip_code es null, establece un valor vacío
+                            value={formData.zip_code || ""} // Si zip_code es null, establece un valor vacío
                             className={classes.input}
                             readOnly // Para evitar la edición del campo
                         />
@@ -118,7 +111,7 @@ const Formulario = ({ datos }) => {
                             type="text"
                             id="zone"
                             name="zone"
-                            value={datos.zone || ""}
+                            value={formData.zone || ""}
                             className={classes.input}
                             onChange={(e) => {
                                 handleChange(e);
@@ -175,31 +168,60 @@ const Paginacion = ({ currentPage, totalPages, onPageChange }) => {
     );
 };
 
-// Componente Principal
-const FormsDinamic = ({ formulariosPerPage, formularios }) => {
+// Componente Principal FormsDinamic
+const FormsDinamic = ({
+    formulariosPerPage,
+    formularios,
+    setFormDataAxios,
+    handleLastFormSent,
+}) => {
     const [currentPage, setCurrentPage] = useState(1);
 
-    // Lógica de paginación
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    const handleFormSent = (index) => {
+        console.log("Formulario enviado: Numero", index);
+        const newFormularios = formularios.filter((_, i) => i !== index);
+        setFormDataAxios(newFormularios);
+        setCurrentPage(1); // Reiniciar a la primera página después de enviar un formulario
+    };
+
+    // Calcular el número total de páginas
+    const totalPages = Math.ceil(formularios.length / formulariosPerPage);
+
+    // Calcular el índice del primer formulario en la página actual
     const indexOfLastFormulario = currentPage * formulariosPerPage;
     const indexOfFirstFormulario = indexOfLastFormulario - formulariosPerPage;
+
+    // Obtener los formularios actuales para mostrar en la página
     const currentFormularios = formularios.slice(
         indexOfFirstFormulario,
         indexOfLastFormulario
     );
 
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    // si no hay mas paginas se cierra la modal
+    if (currentFormularios.length === 0) {
+        handleLastFormSent(false);
+    }
 
     return (
         <div className={classes["steps-navigation-container"]}>
             <h1>Formularios a completar</h1>
             {/* Renderizar formularios actuales */}
             {currentFormularios.map((formulario, index) => (
-                <Formulario key={index} datos={formulario} />
+                <Formulario
+                    key={index}
+                    index={indexOfFirstFormulario + index}
+                    datos={formulario}
+                    onFormSent={() =>
+                        handleFormSent(indexOfFirstFormulario + index)
+                    }
+                />
             ))}
             {/* Renderizar paginación */}
             <Paginacion
                 currentPage={currentPage}
-                totalPages={Math.ceil(formularios.length / formulariosPerPage)}
+                totalPages={totalPages}
                 onPageChange={paginate}
             />
         </div>

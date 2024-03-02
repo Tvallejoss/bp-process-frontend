@@ -1,7 +1,8 @@
 "use client";
 
 // Hooks
-import React from "react";
+import { useState } from "react";
+import axios from "axios";
 
 // Styles
 import classes from "./Table.module.css";
@@ -11,8 +12,32 @@ import { IconRun } from "@/assets/icons";
 
 // Components
 import TableField from "@/components/molecules/TableField";
+import Spinner from "@/components/atoms/Spinner";
+import Modal from "@/components/molecules/Modal";
 
 const Table = () => {
+    const [isLoading, setLoading] = useState(false);
+
+    const runUpdate = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+
+            const runUpdateDB = async () => {
+                await axios
+                    .get("http://localhost:8000/updateeee")
+                    .then(({ data }) => {
+                        alert("Base de datos actualizada con exito");
+                    })
+                    .catch((error) => {
+                        console.log("Error al actualizar base de datos", error);
+                        alert("Error al actualizar base de datos");
+                    });
+            };
+            runUpdateDB();
+        }, 5000);
+    };
+
     return (
         <div className={classes["table-container"]}>
             <div className={classes["table-title"]}>
@@ -26,8 +51,36 @@ const Table = () => {
             </div>
 
             <TableField name="update proccess 1" />
-            <TableField name="update process 2" />
-            <TableField name="update process3" />
+
+            <div className={classes["table-campos"]}>
+                <ol>
+                    <li>Update base de datos</li>
+                    <li>22/02/2024 6:20 AM</li>
+                    <li>Info</li>
+                    <li>Success</li>
+                    <li className={classes["icon-svg"]}>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#f28e2a"
+                            strokeWidth="2"
+                            className="feather feather-play"
+                            onClick={runUpdate}
+                        >
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                    </li>
+                </ol>
+
+                {isLoading && (
+                    <Modal>
+                        <Spinner />
+                    </Modal>
+                )}
+            </div>
         </div>
     );
 };
