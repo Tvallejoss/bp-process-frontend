@@ -1,28 +1,86 @@
-import React from "react";
+"use client";
+
+// Hooks
+import { useState } from "react";
+import axios from "axios";
+
+// Styles
 import classes from "./Table.module.css";
 
+// Icons
+import { IconRun } from "@/assets/icons";
+
+// Components
+import TableField from "@/components/molecules/TableField";
+import Spinner from "@/components/atoms/Spinner";
+import Modal from "@/components/molecules/Modal";
+
 const Table = () => {
+    const [isLoading, setLoading] = useState(false);
+
+    const runUpdate = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+
+            const runUpdateDB = async () => {
+                await axios
+                    .get("http://localhost:8000/updateeee")
+                    .then(({ data }) => {
+                        alert("Base de datos actualizada con exito");
+                    })
+                    .catch((error) => {
+                        console.log("Error al actualizar base de datos", error);
+                        alert("Error al actualizar base de datos");
+                    });
+            };
+            runUpdateDB();
+        }, 5000);
+    };
+
     return (
         <div className={classes["table-container"]}>
-            <table className={classes["table"]}>
-                <thead>
-                    <tr>
-                        <th>Título 1</th>
-                        <th>Título 2</th>
-                        <th>Título 3</th>
-                        <th>Título 4</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Dato 1</td>
-                        <td>Dato 2</td>
-                        <td>Dato 3</td>
-                        <td>Dato 4</td>
-                    </tr>
-                    {/* Agrega más filas según sea necesario */}
-                </tbody>
-            </table>
+            <div className={classes["table-title"]}>
+                <ol className={classes["title"]}>
+                    <li>Procesos</li>
+                    <li>Actualizado</li>
+                    <li>Informacion </li>
+                    <li>Estado</li>
+                    <li>Acciones</li>
+                </ol>
+            </div>
+
+            <TableField name="update proccess 1" />
+
+            <div className={classes["table-campos"]}>
+                <ol>
+                    <li>Actualizar destinos</li>
+                    <li>22/02/2024 6:20 AM</li>
+                    <li>Info</li>
+                    <li>Success</li>
+                    <li className={classes["icon-svg"]}>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#f28e2a"
+                            strokeWidth="2"
+                            className="feather feather-play"
+                            onClick={runUpdate}
+                        >
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                    </li>
+                </ol>
+
+                {isLoading && (
+                    <Modal>
+                        <Spinner />
+                    </Modal>
+                )}
+            </div>
         </div>
     );
 };

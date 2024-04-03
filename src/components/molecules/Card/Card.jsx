@@ -11,7 +11,7 @@ const Card = ({
   gap = 3,
   margin = 5,
   padding = 5,
-  width = 'fit-content',
+  width = '90%',
   height = 'fit-content',
   ...props
 }) => {
