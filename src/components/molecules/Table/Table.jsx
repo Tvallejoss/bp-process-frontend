@@ -25,7 +25,7 @@ const Table = () => {
 
             const runUpdateDB = async () => {
                 await axios
-                    .get("http://localhost:8000/updateeee")
+                    .get("https://back-test.derservicios.com.ar/runUpdaterEnabledPlacesProcess")
                     .then(({ data }) => {
                         alert("Base de datos actualizada con exito");
                     })

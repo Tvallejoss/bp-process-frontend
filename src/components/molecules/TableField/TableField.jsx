@@ -28,7 +28,7 @@ const TableField = ({ name }) => {
 
             const getFormData = async () => {
                 await axios
-                    .get("http://localhost:8000/runViewInserterP1")
+                    .get("https://back-test.derservicios.com.ar/runViewInserterP1")
                     .then(({ data }) => {
                         setshowFormProccessModal(true);
                         setFormDataAxios(data);
