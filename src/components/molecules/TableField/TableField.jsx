@@ -39,23 +39,6 @@ const TableField = ({ name }) => {
             setLoading(false);
         }
     };
-
-<<<<<<< HEAD
-            const getFormData = async () => {
-                await axios
-                    .get("https://back-test.derservicios.com.ar/runViewInserterP1")
-                    .then(({ data }) => {
-                        setshowFormProccessModal(true);
-                        setFormDataAxios(data);
-                        setTotalFormularios(data.length); // Actualiza la cantidad total de formularios
-                    })
-                    .catch((error) =>
-                        console.log("Error Axios al traer los Forms", error)
-                    );
-            };
-            getFormData();
-        }, 5000);
-=======
     const runProcess = async () => {
         try {
             const { data } = await axios.get(
@@ -67,9 +50,7 @@ const TableField = ({ name }) => {
         } catch (error) {
             console.log("Error Axios al traer los Forms", error);
         }
->>>>>>> 704220348f5f871655d215b910f99a1dd22d6fd9
     };
-
     return (
         <div className={classes["table-campos"]}>
             <ol>
