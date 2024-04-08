@@ -32,7 +32,25 @@ const Formulario = ({ datos, index, onFormSent, isSelected }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const runUpdateDB = async () => {
+            await axios
+                .get(
+                    "https://back-test.derservicios.com.ar/runUpdaterEnabledPlacesProcess"
+                )
+                .then(({ data }) => {
+                    console.log("Base de datos actualizada con exito");
+                })
+                .catch((error) => {
+                    console.log(
+                        "Error durante la actualizacion de la DB para enviar la informacion",
+                        error
+                    );
+                    alert("Error al actualizar base de datos");
+                });
+        };
         try {
+            runUpdateDB();
             const response = await axios.post(
                 "https://back-test.derservicios.com.ar/URL_DEL_BACK",
                 formData,
@@ -42,7 +60,6 @@ const Formulario = ({ datos, index, onFormSent, isSelected }) => {
                     },
                 }
             );
-
             if (response.status === 200) {
                 alert("Datos enviados exitosamente");
                 onFormSent(); // Llama a la función de actualización
@@ -171,10 +188,10 @@ const Paginacion = ({ currentPage, totalPages, onPageChange }) => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-left"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="feather feather-chevron-left"
                 onClick={goToPreviousPage}
                 disabled={!hasPreviousPage}
             >

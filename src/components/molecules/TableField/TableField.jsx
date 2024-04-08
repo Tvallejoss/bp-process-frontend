@@ -21,11 +21,26 @@ const TableField = ({ name }) => {
 
     const [totalFormularios, setTotalFormularios] = useState([]);
 
-    const runProcess = () => {
+    const runUpdateDB = async () => {
         setLoading(true);
-        setTimeout(() => {
+        try {
+            await axios.get(
+                "https://back-test.derservicios.com.ar/runUpdaterEnabledPlacesProcess"
+            );
+            console.log("Base de datos actualizada con éxito");
+            runProcess(); 
+        } catch (error) {
+            console.log(
+                "Error durante la actualización de la DB para enviar la información",
+                error
+            );
+            alert("Error al actualizar base de datos");
+        } finally {
             setLoading(false);
+        }
+    };
 
+<<<<<<< HEAD
             const getFormData = async () => {
                 await axios
                     .get("https://back-test.derservicios.com.ar/runViewInserterP1")
@@ -40,6 +55,19 @@ const TableField = ({ name }) => {
             };
             getFormData();
         }, 5000);
+=======
+    const runProcess = async () => {
+        try {
+            const { data } = await axios.get(
+                "https://back-test.derservicios.com.ar/runViewInserterP1"
+            );
+            setshowFormProccessModal(true);
+            setFormDataAxios(data);
+            setTotalFormularios(data.length); // Actualiza la cantidad total de formularios
+        } catch (error) {
+            console.log("Error Axios al traer los Forms", error);
+        }
+>>>>>>> 704220348f5f871655d215b910f99a1dd22d6fd9
     };
 
     return (
@@ -59,7 +87,7 @@ const TableField = ({ name }) => {
                         stroke="#f28e2a"
                         strokeWidth="2"
                         className="feather feather-play"
-                        onClick={runProcess}
+                        onClick={runUpdateDB}
                     >
                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
                     </svg>
