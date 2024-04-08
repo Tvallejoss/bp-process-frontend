@@ -33,13 +33,16 @@ const Formulario = ({ datos, index, onFormSent, isSelected }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("URL_DEL_BACKEND", formData, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
+            const response = await axios.post(
+                "https://back-test.derservicios.com.ar/URL_DEL_BACK",
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
 
-            // Manejar respuesta del backend
             if (response.status === 200) {
                 alert("Datos enviados exitosamente");
                 onFormSent(); // Llama a la función de actualización
@@ -64,7 +67,7 @@ const Formulario = ({ datos, index, onFormSent, isSelected }) => {
                             name="locality_name"
                             value={formData["locality_name"]}
                             className={classes.input}
-                            readOnly
+                            onChange={handleChange}
                         />
                     </div>
 
@@ -76,7 +79,7 @@ const Formulario = ({ datos, index, onFormSent, isSelected }) => {
                             name="enabled_place"
                             value={formData["enabled_place"]}
                             className={classes.input}
-                            readOnly // Para evitar la edición del campo
+                            onChange={handleChange}
                         />
                     </div>
                     <div className={classes.formGroup}>
@@ -87,7 +90,7 @@ const Formulario = ({ datos, index, onFormSent, isSelected }) => {
                             name="province_name"
                             value={formData["province_name"]}
                             className={classes.input}
-                            readOnly // Para evitar la edición del campo
+                            onChange={handleChange}
                         />
                     </div>
                 </div>
@@ -99,24 +102,30 @@ const Formulario = ({ datos, index, onFormSent, isSelected }) => {
                             type="text"
                             id="zip_code"
                             name="zip_code"
-                            value={formData.zip_code || ""} // Si zip_code es null, establece un valor vacío
+                            value={formData.zip_code || ""}
                             className={classes.input}
-                            readOnly // Para evitar la edición del campo
+                            onChange={handleChange}
                         />
                     </div>
 
                     <div className={classes.formGroup}>
-                        <label htmlFor="name">Zona:</label>
-                        <input
-                            type="text"
+                        <label htmlFor="zone">Zona:</label>
+                        <select
                             id="zone"
                             name="zone"
                             value={formData.zone || ""}
                             className={classes.input}
-                            onChange={(e) => {
-                                handleChange(e);
-                            }}
-                        />
+                            onChange={handleChange}
+                        >
+                            <option value="">Seleccionar Zona</option>
+                            <option value="caba">CABA</option>
+                            <option value="amba">AMBA</option>
+                            <option value="inside_pba">PBA</option>
+                            <option value="inside1">INTERIOR 1</option>
+                            <option value="inside2">INTERIOR 2</option>
+                            <option value="inside3">INTERIOR 3</option>
+                            <option value="Iinside4">INTERIOR 4</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -154,7 +163,7 @@ const Paginacion = ({ currentPage, totalPages, onPageChange }) => {
     };
 
     return (
-        <div className={classes['buttons-pagination-container']}>
+        <div className={classes["buttons-pagination-container"]}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="40"
@@ -169,9 +178,7 @@ const Paginacion = ({ currentPage, totalPages, onPageChange }) => {
                 onClick={goToPreviousPage}
                 disabled={!hasPreviousPage}
             >
-                <polyline
-                    points="15 18 9 12 15 6"
-                ></polyline>
+                <polyline points="15 18 9 12 15 6"></polyline>
                 Anterior
             </svg>
             <span>
