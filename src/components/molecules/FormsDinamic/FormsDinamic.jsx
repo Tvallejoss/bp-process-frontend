@@ -60,7 +60,7 @@ const Formulario = ({ datos, index, onFormSent, isSelected }) => {
         try {
             runUpdateDB();
             const response = await axios.post(
-                "https://back-test.derservicios.com.ar/URL_DEL_BACK",
+                "https://back-test.derservicios.com.ar/runViewInserterP2",
                 formData,
                 {
                     headers: {
