@@ -9,17 +9,25 @@ import classes from "./FormsDinamic.module.css";
 
 const Formulario = ({ datos, index, onFormSent, isSelected }) => {
     const [formData, setFormData] = useState({
-        idlocality: datos["idlocality"],
+        idog: datos["idlocality"],
         zip_code: datos["zip_code"] || "",
         province_name: datos["province_name"],
         locality_name: datos["locality_name"],
         enabled_place: datos["enabled_place"],
         isActive: datos["isActive"],
         zone: datos["zone"] || "",
+        code: datos["code"] || "",
     });
-
     useEffect(() => {
-        setFormData(datos);
+        const hasDataChanged = Object.keys(formData).some(
+            (key) => formData[key] !== datos[key]
+        );
+        if (hasDataChanged) {
+            setFormData((prevData) => ({
+                ...prevData,
+                ...datos,
+            }));
+        }
     }, [datos]);
 
     const handleChange = (e) => {
@@ -32,7 +40,7 @@ const Formulario = ({ datos, index, onFormSent, isSelected }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        console.log("Data a enviar", formData);
         const runUpdateDB = async () => {
             await axios
                 .get(
