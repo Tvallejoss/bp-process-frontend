@@ -16,9 +16,9 @@ const LoginForm = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.get(
+            const response = await axios.post(
                 "https://back-test.derservicios.com.ar/login",
-                { user: username, password: password }
+                { user: username, user_password: password }
             );
             localStorage.setItem("isLoggedIn", "true");
             window.location.href = "/home";
