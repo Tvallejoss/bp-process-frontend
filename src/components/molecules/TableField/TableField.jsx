@@ -28,7 +28,7 @@ const TableField = ({ name }) => {
                 "https://back-test.derservicios.com.ar/runUpdaterEnabledPlacesProcess"
             );
             console.log("Base de datos actualizada con éxito");
-            runProcess(); 
+            runProcess();
         } catch (error) {
             console.log(
                 "Error durante la actualización de la DB para enviar la información",
@@ -56,10 +56,10 @@ const TableField = ({ name }) => {
     return (
         <div className={classes["table-campos"]}>
             <ol>
-                <li> Insertar destinos Sait</li>
-                <li>22/02/2024 6:20 AM</li>
-                <li>Info</li>
-                <li>Success</li>
+                <li>Insertar Destinos Sait</li>
+                <li>------</li>
+                <li>------</li>
+                <li>------</li>
                 <li className={classes["icon-svg"]}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

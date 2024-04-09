@@ -16,6 +16,7 @@ const Formulario = ({ datos, index, onFormSent, isSelected }) => {
         enabled_place: datos["enabled_place"],
         isActive: datos["isActive"],
         zone: datos["zone"] || "",
+        code: datos["code"] || "",
     });
 
     useEffect(() => {

@@ -53,13 +53,12 @@ const Table = () => {
             </div>
 
             <TableField name="update proccess 1" />
-
             <div className={classes["table-campos"]}>
                 <ol>
-                    <li>Actualizar destinos</li>
-                    <li>22/02/2024 6:20 AM</li>
-                    <li>Info</li>
-                    <li>Success</li>
+                    <li>Actualizar Destinos</li>
+                    <li>------</li>
+                    <li>------</li>
+                    <li>------</li>
                     <li className={classes["icon-svg"]}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
