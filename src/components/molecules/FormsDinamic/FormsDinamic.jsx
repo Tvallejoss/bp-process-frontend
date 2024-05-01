@@ -9,7 +9,7 @@ import classes from "./FormsDinamic.module.css";
 
 const Formulario = ({ datos, index, onFormSent, isSelected }) => {
     const [formData, setFormData] = useState({
-        idog: datos["idlocality"],
+        idog: datos["idog"],
         zip_code: datos["zip_code"] || "",
         province_name: datos["province_name"],
         locality_name: datos["locality_name"],
@@ -104,7 +104,8 @@ const Formulario = ({ datos, index, onFormSent, isSelected }) => {
                             name="enabled_place"
                             value={formData["enabled_place"]}
                             className={classes.input}
-                            onChange={handleChange}
+                            // onChange={handleChange}
+                            disabled
                         />
                     </div>
                     <div className={classes.formGroup}>
@@ -115,7 +116,8 @@ const Formulario = ({ datos, index, onFormSent, isSelected }) => {
                             name="province_name"
                             value={formData["province_name"]}
                             className={classes.input}
-                            onChange={handleChange}
+                            // onChange={handleChange}
+                            disabled
                         />
                     </div>
                 </div>
